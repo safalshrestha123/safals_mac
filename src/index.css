@@ -139,6 +139,38 @@ body {
         }
     }
 
+    /* SAFARI FIXES FOR DOCK LAYOUT */
+    #dock .dock-container {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+
+        width: max-content !important; /* prevents Safari breaking */
+    }
+    #dock img {
+        width: 56px !important;
+        height: 56px !important;
+        object-fit: contain !important;
+    }
+
+
+    /* SAFARI DOCK FIX */
+    #dock .dock-container {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        width: max-content !important;
+    }
+
+    /* ICON SIZE FIX */
+    #dock .dock-button img,
+    #dock .dock-icon img {
+        width: 56px !important;
+        height: 56px !important;
+        object-fit: contain !important;
+    }
+
 
     #dock {
         @apply absolute bottom-5 left-1/2 -translate-x-1/2 z-50 select-none max-sm:hidden;
