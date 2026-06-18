@@ -189,6 +189,10 @@ body {
             img {
                 @apply object-cover object-center;
             }
+
+            .dock-running-indicator {
+                @apply absolute -bottom-1 left-1/2 size-1.5 -translate-x-1/2 rounded-full bg-gray-800 shadow-sm;
+            }
         }
     }
 

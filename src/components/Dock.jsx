@@ -64,7 +64,9 @@ const Dock = () => {
         const window = windows[app.id];
         if (!window) return;
 
-        if (window.isOpen) {
+        if (window.isMinimized) {
+            openWindow(app.id);
+        } else if (window.isOpen) {
             closeWindow(app.id);
         } else {
             openWindow(app.id);
@@ -83,6 +85,7 @@ const Dock = () => {
                             data-tooltip-id="dock-tooltip"
                             data-tooltip-content={name}
                             data-tooltip-delay-show={150}
+                            data-dock-app={id}
                             disabled={!canOpen}
                             onClick={() => toggleApp({ id, canOpen })}
                         >
@@ -93,6 +96,12 @@ const Dock = () => {
                                 className={canOpen ? "" : "opacity-60"}
                             />
                         </button>
+                        {windows[id]?.isOpen && (
+                            <span
+                                className="dock-running-indicator"
+                                aria-label={`${name} is running`}
+                            />
+                        )}
                     </div>
                 ))}
 
