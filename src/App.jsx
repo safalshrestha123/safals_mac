@@ -1,6 +1,6 @@
 import React from 'react'
-import {Dock, Navbar, Welcome} from "#components/index.js";
-import { Terminal } from "#windows/index.js";
+import {Dock, Home, Navbar, Welcome} from "#components/index.js";
+import { Contact, Finder, ImageFile, Photos, Resume, Safari, Terminal, TextFile, Trash } from "#windows/index.js";
 
 
 const App = () => {
@@ -8,7 +8,16 @@ const App = () => {
         <main>
             <Navbar />
             <Welcome />
+            <Home />
+            <Safari />
             <Terminal />
+            <Finder />
+            <TextFile />
+            <ImageFile />
+            <Resume />
+            <Photos />
+            <Contact />
+            <Trash />
             <Dock/>
         </main>
     )

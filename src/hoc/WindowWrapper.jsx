@@ -148,6 +148,7 @@ const WindowWrapper = (Component, windowKey) => {
                 const [draggable] = Draggable.create(element, {
                     trigger: element.querySelector("#window-header") ?? element,
                     bounds: document.body,
+                    dragClickables: false,
                     onPress: () => focusWindow(windowKey),
                 });
 

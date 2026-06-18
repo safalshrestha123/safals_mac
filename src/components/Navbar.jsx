@@ -1,16 +1,32 @@
 import React from 'react'
-import {navIcons, navLinks} from "#constants";
+import {locations, navIcons, navLinks} from "#constants";
 import dayjs from "dayjs";
+import useWindowStore from "#store/window.js";
+import useLocationStore from "#store/location.js";
+
 const Navbar = () => {
+    const openWindow = useWindowStore((state) => state.openWindow);
+    const resetActiveLocation = useLocationStore((state) => state.resetActiveLocation);
+
+    const openNavbarWindow = (type) => {
+        if (type === "finder") resetActiveLocation();
+        openWindow(type, type === "finder" ? locations.work : null);
+    };
+
     return <nav >
         <div>
             <img src="/images/logo.svg" alt="logo" />
             <p className={"font-bold"}> Safal'S Portfolio</p>
 
             <ul >
-                {navLinks.map(({id, name}) => (
+                {navLinks.map(({id, name, type}) => (
                     <li key = {id}>
-                        <p>{name}</p>
+                        <button
+                            type="button"
+                            onClick={() => openNavbarWindow(type)}
+                        >
+                            {name}
+                        </button>
                     </li>
 
                 ))}

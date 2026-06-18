@@ -132,28 +132,28 @@ const socials = [
         text: "Github",
         icon: "/icons/github.svg",
         bg: "#f4656b",
-        link: "https://github.com/JavaScript-Mastery-Pro",
+        link: "https://github.com/safalshrestha123",
     },
     {
         id: 2,
-        text: "Platform",
+        text: "Portfolio",
         icon: "/icons/atom.svg",
         bg: "#4bcb63",
-        link: "https://jsmastery.com/",
+        link: "https://safal.info.np",
     },
     {
         id: 3,
-        text: "Twitter/X",
-        icon: "/icons/twitter.svg",
+        text: "Email",
+        icon: "/images/contact.png",
         bg: "#ff866b",
-        link: "https://x.com/jsmasterypro",
+        link: "mailto:safalshrestha.ks@gmail.com",
     },
     {
         id: 4,
-        text: "LinkedIn",
-        icon: "/icons/linkedin.svg",
+        text: "Call",
+        icon: "/icons/user.svg",
         bg: "#05b6f6",
-        link: "https://www.linkedin.com/company/javascriptmastery/posts/?feedView=all",
+        link: "tel:+19084937986",
     },
 ];
 
@@ -188,19 +188,23 @@ const photosLinks = [
 const gallery = [
     {
         id: 1,
-        img: "/images/gal1.png",
+        img: "/images/s-22.png",
+        categories: ["Memories", "Places", "People"],
     },
     {
         id: 2,
-        img: "/images/gal2.png",
+        img: "/images/s-7.png",
+        categories: [],
     },
     {
         id: 3,
-        img: "/images/gal3.png",
+        img: "/images/s-16.png",
+        categories: ["Memories", "People"],
     },
     {
         id: 4,
-        img: "/images/gal4.png",
+        img: "/images/s-20.png",
+        categories: ["Memories", "Places", "People"],
     },
 ];
 
@@ -225,15 +229,16 @@ const WORK_LOCATION = {
         // ▶ Project 1
         {
             id: 5,
-            name: "Nike Ecommerce Website Application",
+            name: "SafalS Portfolio",
             icon: "/images/folder.png",
             kind: "folder",
             position: "top-10 left-5", // icon position inside Finder
+            desktopPosition: "top-24 left-6",
             windowPosition: "top-[5vh] left-5", // optional: Finder window position
             children: [
                 {
                     id: 1,
-                    name: "Nike Project.txt",
+                    name: "SafalS Portfolio Project.txt",
                     icon: "/images/txt.png",
                     kind: "file",
                     fileType: "txt",
@@ -247,16 +252,16 @@ const WORK_LOCATION = {
                 },
                 {
                     id: 2,
-                    name: "nike.com",
+                    name: "safals.info.np",
                     icon: "/images/safari.png",
                     kind: "file",
                     fileType: "url",
-                    href: "https://youtu.be/fZdTYswuZjU?si=Awjl-pIst9e09_UU",
+                    href: "https://safal.info.np",
                     position: "top-10 right-20",
                 },
                 {
                     id: 4,
-                    name: "nike.png",
+                    name: "protfolio.png",
                     icon: "/images/image.png",
                     kind: "file",
                     fileType: "img",
@@ -278,10 +283,11 @@ const WORK_LOCATION = {
         // ▶ Project 2
         {
             id: 6,
-            name: "AI Resume Analyzer",
+            name: "Reflection Unisex Web",
             icon: "/images/folder.png",
             kind: "folder",
             position: "top-52 right-80",
+            desktopPosition: "top-64 left-6",
             windowPosition: "top-[20vh] left-7",
             children: [
                 {
@@ -335,6 +341,7 @@ const WORK_LOCATION = {
             icon: "/images/folder.png",
             kind: "folder",
             position: "top-10 left-80",
+            desktopPosition: "top-[28rem] left-6",
             windowPosition: "top-[33vh] left-7",
             children: [
                 {
@@ -397,7 +404,7 @@ const ABOUT_LOCATION = {
             kind: "file",
             fileType: "img",
             position: "top-10 left-5",
-            imageUrl: "/images/adrian.jpg",
+            imageUrl: "/images/s-3.png",
         },
         {
             id: 2,
@@ -406,7 +413,7 @@ const ABOUT_LOCATION = {
             kind: "file",
             fileType: "img",
             position: "top-28 right-72",
-            imageUrl: "/images/adrian-2.jpg",
+            imageUrl: "/images/s-13.png",
         },
         {
             id: 3,
@@ -415,7 +422,7 @@ const ABOUT_LOCATION = {
             kind: "file",
             fileType: "img",
             position: "top-52 left-80",
-            imageUrl: "/images/adrian-3.jpeg",
+            imageUrl: "/images/s-21.png",
         },
         {
             id: 4,
@@ -425,7 +432,7 @@ const ABOUT_LOCATION = {
             fileType: "txt",
             position: "top-60 left-5",
             subtitle: "Meet the Developer Behind the Code",
-            image: "/images/adrian.jpg",
+            image: "/images/s-7.png",
             description: [
                 "Hey! I’m Adrian 👋, a web developer who enjoys building sleek, interactive websites that actually work well.",
                 "I specialize in JavaScript, React, and Next.js—and I love making things feel smooth, fast, and just a little bit delightful.",
@@ -501,6 +508,7 @@ const WINDOW_CONFIG = {
     terminal: { isOpen: false, isMinimized: false, zIndex: INITIAL_Z_INDEX, data: null },
     txtfile: { isOpen: false, isMinimized: false, zIndex: INITIAL_Z_INDEX, data: null },
     imgfile: { isOpen: false, isMinimized: false, zIndex: INITIAL_Z_INDEX, data: null },
+    trash: { isOpen: false, isMinimized: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };

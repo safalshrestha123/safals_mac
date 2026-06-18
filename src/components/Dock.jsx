@@ -5,9 +5,22 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import useWindowStore from "#store/window.js";
 
+const PREVIEW_DOCK_APP = {
+    id: "imgfile",
+    name: "Preview",
+    icon: "image.png",
+    canOpen: true,
+};
+
 const Dock = () => {
     const dockRef = useRef(null);
-    const { windows, openWindow, closeWindow } = useWindowStore();
+    const { windows, openWindow, closeWindow, focusWindow } = useWindowStore();
+    const showPreview = windows.imgfile?.isOpen;
+    const visibleDockApps = dockApps.flatMap((app) =>
+        app.id === "trash" && showPreview
+            ? [PREVIEW_DOCK_APP, app]
+            : [app],
+    );
 
     useGSAP(() => {
         const dock = dockRef.current;
@@ -56,13 +69,22 @@ const Dock = () => {
             dock.removeEventListener("mousemove", handleMouseMove);
             dock.removeEventListener("mouseleave", resetIcons);
         };
-    }, []);
+    }, [showPreview]);
 
     const toggleApp = (app) => {
         if (!app.canOpen) return;
 
         const window = windows[app.id];
         if (!window) return;
+
+        if (app.id === "imgfile") {
+            if (window.isMinimized) {
+                openWindow(app.id);
+            } else {
+                focusWindow(app.id);
+            }
+            return;
+        }
 
         if (window.isMinimized) {
             openWindow(app.id);
@@ -76,7 +98,7 @@ const Dock = () => {
     return (
         <section id="dock">
             <div ref={dockRef} className="dock-container">
-                {dockApps.map(({ id, name, icon, canOpen }) => (
+                {visibleDockApps.map(({ id, name, icon, canOpen }) => (
                     <div key={id} className="dock-icon relative flex justify-center">
                         <button
                             type="button"

@@ -9,7 +9,7 @@ body {
     overflow: hidden;
     height: 100dvh;
     min-height: 100dvh;
-    background-image: url("/images/wallpaper.png");
+    background-image: url("/images/wallpaper-4.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -34,7 +34,7 @@ body {
 }
 @layer base {
     nav {
-        @apply flex justify-between items-center bg-white/50 p-2 px-5 select-none;
+        @apply relative z-50 flex justify-between items-center bg-white/50 p-2 px-5 select-none;
         backdrop-filter: blur(24px);
         -webkit-backdrop-filter: blur(24px);
         height: 4rem; /* Safari requires explicit height for blurred flex containers */
@@ -52,7 +52,8 @@ body {
         @apply flex items-center gap-5 max-sm:hidden;
     }
 
-    nav ul p {
+    nav ul p,
+    nav ul button {
         @apply text-sm cursor-pointer hover:underline transition-all;
     }
 
@@ -229,7 +230,8 @@ body {
         }
 
         .blog {
-            @apply bg-white p-10 max-w-3xl mx-auto;
+            @apply bg-white p-10 max-w-3xl mx-auto overflow-y-auto;
+            max-height: 70dvh;
 
             h2 {
                 @apply text-xl font-bold text-pink-600 mb-10;
@@ -239,7 +241,7 @@ body {
                 @apply grid grid-cols-12 space-x-5;
 
                 img {
-                    @apply size-full rounded-md object-cover;
+                    @apply size-full aspect-square rounded-md object-cover;
                 }
 
                 .content {
@@ -308,7 +310,7 @@ body {
     }
 
     #contact {
-        @apply max-w-2xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+        @apply w-2xl absolute top-48 left-1/2 -translate-x-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
         h2 {
             @apply font-bold text-sm text-center w-full;
@@ -318,14 +320,14 @@ body {
             @apply text-xl font-semibold;
         }
 
-        ul {
-            @apply flex items-center gap-3;
+        .contact-links {
+            @apply grid grid-cols-2 gap-3;
 
             li {
-                @apply rounded-lg p-3 w-60 hover:-translate-y-0.5 hover:scale-105 origin-center transition-all duration-300;
+                @apply rounded-lg p-3 hover:-translate-y-0.5 hover:scale-[1.02] origin-center transition-all duration-300;
 
                 a {
-                    @apply space-y-5;
+                    @apply flex items-center gap-3;
                 }
 
                 p {
@@ -336,7 +338,7 @@ body {
     }
 
     #photos {
-        @apply max-w-3xl absolute top-96 left-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+        @apply w-3xl absolute top-24 left-1/2 -translate-x-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
         .sidebar {
             @apply w-3/12 flex-none bg-gray-50 border-r border-gray-200 flex flex-col p-5;
@@ -349,8 +351,12 @@ body {
                 li {
                     @apply flex space-y-1 items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors;
 
-                    &:first-child {
+                    &.active {
                         @apply bg-blue-100 text-blue-700;
+                    }
+
+                    &.not-active {
+                        @apply text-gray-700 hover:bg-gray-200;
                     }
 
                     img {
@@ -395,18 +401,81 @@ body {
         }
     }
 
+    #trash {
+        @apply w-2xl absolute top-28 left-1/2 -translate-x-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+
+        #window-header h2 {
+            @apply ml-4 font-bold text-sm text-gray-700;
+        }
+
+        .trash-content {
+            @apply h-96 bg-white p-8;
+
+            ul {
+                @apply grid grid-cols-4 gap-6;
+            }
+
+            li button {
+                @apply flex w-full flex-col items-center gap-2 rounded-lg p-3 hover:bg-gray-100;
+            }
+
+            li img {
+                @apply size-16 object-contain;
+            }
+
+            li p {
+                @apply text-center text-xs font-medium text-gray-700;
+            }
+
+            .trash-empty {
+                @apply flex size-full flex-col items-center justify-center gap-3 text-gray-400;
+            }
+        }
+    }
+
     #resume {
-        @apply w-fit h-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+        @apply w-fit h-fit absolute top-16 left-1/2 -translate-x-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
         #window-header {
             h2 {
                 @apply font-bold text-sm text-center flex-1;
             }
         }
+
+        .resume-preview {
+            @apply overflow-y-auto bg-gray-100 p-2;
+            width: min(70vw, 56rem);
+            height: min(75dvh, 50rem);
+
+            .react-pdf__Document {
+                @apply flex justify-center;
+            }
+
+            .react-pdf__Page {
+                @apply overflow-hidden rounded-sm shadow-sm;
+            }
+
+            .react-pdf__Page canvas {
+                @apply block max-w-full;
+                height: auto !important;
+            }
+
+            .resume-status {
+                @apply flex h-full items-center justify-center p-8 text-center text-sm text-gray-500;
+            }
+        }
     }
 
     #finder {
         @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl;
+
+        .finder-search {
+            @apply flex items-center gap-2 rounded-md border border-gray-300 bg-white px-2 py-1;
+
+            input {
+                @apply w-32 outline-none;
+            }
+        }
 
         .sidebar {
             @apply w-48 bg-gray-50 border-r border-gray-200 flex flex-col p-5 space-y-3;
@@ -460,27 +529,30 @@ body {
     #imgfile {
         @apply w-xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
-        #window-header {
-            p {
-                @apply font-bold text-[#5f6266];
-            }
+        .image-actions {
+            @apply ml-auto flex items-center gap-3 text-gray-400;
         }
 
         .preview {
-            @apply p-2 bg-gray-200 max-h-[70vh];
+            @apply p-2 bg-gray-200 max-h-[70vh] overflow-auto;
 
             img {
-                @apply w-full h-fit object-contain object-center;
+                @apply w-full h-fit object-contain object-center transition-transform duration-300;
+                transform-origin: center;
+            }
+
+            img.zoomed {
+                transform: scale(1.2);
             }
         }
     }
 
     #home {
-        @apply relative z-0 max-sm:hidden;
+        @apply pointer-events-none absolute inset-x-0 bottom-0 top-16 z-0 max-sm:hidden;
 
         ul {
             li {
-                @apply absolute z-0 select-none flex items-center flex-col;
+                @apply pointer-events-auto absolute z-0 select-none flex items-center flex-col cursor-grab active:cursor-grabbing;
 
                 img {
                     @apply group-hover:bg-gray-950/10 p-1 rounded-md;
