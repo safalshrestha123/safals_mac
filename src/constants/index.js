@@ -106,7 +106,7 @@ const techStack = [
     },
     {
         category: "Mobile",
-        items: ["React Native", "Expo"],
+        items: ["React Native", "Flutter"],
     },
     {
         category: "Styling",
@@ -193,7 +193,7 @@ const gallery = [
     },
     {
         id: 2,
-        img: "/images/s-7.png",
+        img: "/images/s-2.png",
         categories: [],
     },
     {
@@ -320,7 +320,7 @@ const WORK_LOCATION = {
                     kind: "file",
                     fileType: "img",
                     position: "top-52 left-80",
-                    imageUrl: "/images/project-2.png",
+                    imageUrl: "",
                 },
                 {
                     id: 5,
@@ -374,7 +374,7 @@ const WORK_LOCATION = {
                     kind: "file",
                     fileType: "img",
                     position: "top-52 right-80",
-                    imageUrl: "/images/project-3.png",
+                    imageUrl: "",
                 },
                 {
                     id: 5,
