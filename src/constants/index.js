@@ -81,21 +81,21 @@ const blogPosts = [
         title:
             "TypeScript Explained: What It Is, Why It Matters, and How to Master It",
         image: "/images/blog1.png",
-        link: "https://jsmastery.com/blog/typescript-explained-what-it-is-why-it-matters-and-how-to-master-it",
+        link: "https://safal.info.np",
     },
     {
         id: 2,
         date: "Aug 28, 2025",
         title: "The Ultimate Guide to Mastering Three.js for 3D Development",
         image: "/images/blog2.png",
-        link: "https://jsmastery.com/blog/the-ultimate-guide-to-mastering-three-js-for-3d-development",
+        link: "https://safal.info.np",
     },
     {
         id: 3,
         date: "Aug 15, 2025",
         title: "The Ultimate Guide to Mastering GSAP Animations",
         image: "/images/blog3.png",
-        link: "https://jsmastery.com/blog/the-ultimate-guide-to-mastering-gsap-animations",
+        link: "https://safal.info.np",
     },
 ];
 
@@ -229,30 +229,30 @@ const WORK_LOCATION = {
         // ▶ Project 1
         {
             id: 5,
-            name: "SafalS Portfolio",
+            name: "Safal's macOS Portfolio",
             icon: "/images/folder.png",
             kind: "folder",
-            position: "top-10 left-5", // icon position inside Finder
+            position: "top-10 left-5",
             desktopPosition: "top-24 left-6",
-            windowPosition: "top-[5vh] left-5", // optional: Finder window position
+            windowPosition: "top-[5vh] left-5",
             children: [
                 {
                     id: 1,
-                    name: "SafalS Portfolio Project.txt",
+                    name: "Safal Portfolio Project.txt",
                     icon: "/images/txt.png",
                     kind: "file",
                     fileType: "txt",
                     position: "top-5 left-10",
                     description: [
-                        "The Nike eCommerce website is a sleek and modern platform designed for shopping the latest Nike collections.",
-                        "Instead of a simple online store, it delivers an immersive experience with bold visuals, interactive product displays, and smooth navigation.",
-                        "Think of it like walking into a flagship Nike store—but right from your phone or laptop.",
-                        "It's built with Next.js and Tailwind, ensuring fast performance, responsive design, and a clean, premium look.",
+                        "Safal's macOS Portfolio is an interactive personal portfolio designed like a modern desktop operating system.",
+                        "Instead of a normal portfolio page, visitors can explore my work through folders, windows, app icons, and a macOS-style interface.",
+                        "The project shows my frontend development skills, UI creativity, React component structure, and product design thinking.",
+                        "It is built with React, Vite, JavaScript, Tailwind CSS, draggable windows, desktop-style navigation, and interactive portfolio sections.",
                     ],
                 },
                 {
                     id: 2,
-                    name: "safals.info.np",
+                    name: "safal.info.np",
                     icon: "/images/safari.png",
                     kind: "file",
                     fileType: "url",
@@ -261,7 +261,7 @@ const WORK_LOCATION = {
                 },
                 {
                     id: 4,
-                    name: "protfolio.png",
+                    name: "portfolio.png",
                     icon: "/images/image.png",
                     kind: "file",
                     fileType: "img",
@@ -270,11 +270,11 @@ const WORK_LOCATION = {
                 },
                 {
                     id: 5,
-                    name: "Design.fig",
+                    name: "Tech Stack.fig",
                     icon: "/images/plain.png",
                     kind: "file",
                     fileType: "fig",
-                    href: "https://google.com",
+                    href: "https://safal.info.np",
                     position: "top-60 right-20",
                 },
             ],
@@ -283,7 +283,7 @@ const WORK_LOCATION = {
         // ▶ Project 2
         {
             id: 6,
-            name: "Reflection Unisex Web",
+            name: "Reflection Unisex Website",
             icon: "/images/folder.png",
             kind: "folder",
             position: "top-52 right-80",
@@ -292,30 +292,30 @@ const WORK_LOCATION = {
             children: [
                 {
                     id: 1,
-                    name: "AI Resume Analyzer Project.txt",
+                    name: "Reflection Unisex Website.txt",
                     icon: "/images/txt.png",
                     kind: "file",
                     fileType: "txt",
                     position: "top-5 right-10",
                     description: [
-                        "AI Resume Analyzer is a smart tool that helps you perfect your resume with instant feedback.",
-                        "Instead of guessing what recruiters want, you get AI-powered insights on keywords, formatting, and overall impact.",
-                        "Think of it like having a career coach—pointing out strengths, fixing weaknesses, and boosting your chances of landing interviews.",
-                        "It's built with Next.js and Tailwind, so it runs fast, looks professional, and works seamlessly on any device.",
+                        "Reflection Unisex Website is a business website created for a salon and beauty service brand.",
+                        "The website helps customers learn about the business, services, location, contact details, and overall brand identity.",
+                        "This project represents my freelance web development and digital marketing experience for small businesses.",
+                        "My work included website setup, responsive design, domain/DNS configuration, SEO support, and improving the online presence of the business.",
                     ],
                 },
                 {
                     id: 2,
-                    name: "ai-resume-analyzer.com",
+                    name: "reflectionunisex.com",
                     icon: "/images/safari.png",
                     kind: "file",
                     fileType: "url",
-                    href: "https://youtu.be/iYOz165wGkQ?si=R1hs8Legl200m0Cl",
+                    href: "https://reflectionunisex.com",
                     position: "top-20 left-20",
                 },
                 {
                     id: 4,
-                    name: "ai-resume-analyzer.png",
+                    name: "reflection-unisex.png",
                     icon: "/images/image.png",
                     kind: "file",
                     fileType: "img",
@@ -324,11 +324,11 @@ const WORK_LOCATION = {
                 },
                 {
                     id: 5,
-                    name: "Design.fig",
+                    name: "SEO Plan.fig",
                     icon: "/images/plain.png",
                     kind: "file",
                     fileType: "fig",
-                    href: "https://google.com",
+                    href: "https://reflectionunisex.com",
                     position: "top-60 left-5",
                 },
             ],
@@ -337,7 +337,7 @@ const WORK_LOCATION = {
         // ▶ Project 3
         {
             id: 7,
-            name: "Food Delivery App",
+            name: "Nepal Treks by Kishan Website",
             icon: "/images/folder.png",
             kind: "folder",
             position: "top-10 left-80",
@@ -346,30 +346,30 @@ const WORK_LOCATION = {
             children: [
                 {
                     id: 1,
-                    name: "Food Delivery App Project.txt",
+                    name: "Nepal Treks Website.txt",
                     icon: "/images/txt.png",
                     kind: "file",
                     fileType: "txt",
                     position: "top-5 left-10",
                     description: [
-                        "Our Food Delivery App is a fast and convenient way to order meals from your favorite restaurants.",
-                        "Instead of making calls or waiting in line, you can browse menus, customize orders, and track deliveries in real time.",
-                        "Think of it like having your favorite restaurants in your pocket—ready to deliver anytime, anywhere.",
-                        "It’s built with React Native, so it works smoothly on both iOS and Android with a clean, modern design.",
+                        "Nepal Treks by Kishan is a travel and trekking website built to promote trekking services in Nepal.",
+                        "The website helps visitors explore trekking options, learn about the guide or business, and contact the service provider easily.",
+                        "This project shows my ability to create business-focused websites with clean design, clear navigation, and responsive layouts.",
+                        "It also connects with my freelance experience in helping small businesses improve their online visibility and customer reach.",
                     ],
                 },
                 {
                     id: 2,
-                    name: "food-delivery-app.com",
+                    name: "nepaltreksbykishan.com",
                     icon: "/images/safari.png",
                     kind: "file",
                     fileType: "url",
-                    href: "https://youtu.be/LKrX390fJMw?si=cExkuVhf2DTV9G2-",
+                    href: "https://nepaltreksbykishan.com",
                     position: "top-10 right-20",
                 },
                 {
                     id: 4,
-                    name: "food-delivery-app.png",
+                    name: "nepal-treks.png",
                     icon: "/images/image.png",
                     kind: "file",
                     fileType: "img",
@@ -378,11 +378,11 @@ const WORK_LOCATION = {
                 },
                 {
                     id: 5,
-                    name: "Design.fig",
+                    name: "Website Plan.fig",
                     icon: "/images/plain.png",
                     kind: "file",
                     fileType: "fig",
-                    href: "https://google.com",
+                    href: "https://nepaltreksbykishan.com",
                     position: "top-60 right-20",
                 },
             ],
@@ -433,12 +433,10 @@ const ABOUT_LOCATION = {
             position: "top-60 left-5",
             subtitle: "Meet the Developer Behind the Code",
             image: "/images/s-7.png",
-            description: [
-                "Hey! I’m Adrian 👋, a web developer who enjoys building sleek, interactive websites that actually work well.",
-                "I specialize in JavaScript, React, and Next.js—and I love making things feel smooth, fast, and just a little bit delightful.",
-                "I’m big on clean UI, good UX, and writing code that doesn’t need a search party to debug.",
-                "Outside of dev work, you'll find me tweaking layouts at 2AM, sipping overpriced coffee, or impulse-buying gadgets I absolutely convinced myself I needed 😅",
-            ],
+            description:[ "Hey! I’m Safal 👋, a computer science graduate student and developer who enjoys building modern, interactive, and useful web experiences.",
+                 "I work with JavaScript, React, Next.js, Java, Python, and AI tools—and I like creating projects that are fast, clean, and practical.",
+                 "I’m interested in frontend development, AI applications, backend systems, and building creative portfolio experiences like this macOS-style web app.",
+                 "Outside of coding, you’ll probably find me improving my projects late at night, learning new tech, experimenting with AI ideas, or fixing one tiny UI detail for way too long 😅", ]
         },
     ],
 };

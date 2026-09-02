@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { Heart, Mail } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { ArrowLeft, ChevronLeft, ChevronRight, Heart, Mail, Share2 } from "lucide-react";
 import { gallery, photosLinks } from "#constants/index.js";
 import WindowControls from "#components/WindowControls.jsx";
 import WindowWrapper from "#hoc/WindowWrapper.jsx";
@@ -15,9 +15,9 @@ const readFavorites = () => {
 
 const Photos = () => {
     const [selectedGallery, setSelectedGallery] = useState("Library");
+    const [selectedPhotoId, setSelectedPhotoId] = useState(null);
     const [favorites, setFavorites] = useState(readFavorites);
     const openWindow = useWindowStore((state) => state.openWindow);
-    const focusWindow = useWindowStore((state) => state.focusWindow);
 
     useEffect(() => {
         localStorage.setItem("photo-favorites", JSON.stringify(favorites));
@@ -34,43 +34,127 @@ const Photos = () => {
         );
     }, [favorites, selectedGallery]);
 
+    const selectedIndex = visiblePhotos.findIndex(({ id }) => id === selectedPhotoId);
+    const selectedPhoto = selectedIndex >= 0 ? visiblePhotos[selectedIndex] : null;
+
+    const showPhotoAt = useCallback((index) => {
+        if (visiblePhotos.length === 0) return;
+        const wrappedIndex = (index + visiblePhotos.length) % visiblePhotos.length;
+        setSelectedPhotoId(visiblePhotos[wrappedIndex].id);
+    }, [visiblePhotos]);
+
+    useEffect(() => {
+        if (!selectedPhoto) return;
+
+        const handleKeyDown = (event) => {
+            if (event.key === "ArrowLeft") showPhotoAt(selectedIndex - 1);
+            if (event.key === "ArrowRight") showPhotoAt(selectedIndex + 1);
+            if (event.key === "Escape") setSelectedPhotoId(null);
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [selectedIndex, selectedPhoto, showPhotoAt]);
+
     const toggleFavorite = (event, id) => {
         event.stopPropagation();
+        const isRemoving = favorites.includes(id);
+
         setFavorites((current) =>
-            current.includes(id)
+            isRemoving
                 ? current.filter((favoriteId) => favoriteId !== id)
                 : [...current, id],
         );
+
+        if (isRemoving && selectedGallery === "Favorites") {
+            setSelectedPhotoId(null);
+        }
     };
 
-    const openPhoto = (id, imageUrl) => {
-        openWindow("imgfile", {
-            id,
-            name: `Gallery image ${id}`,
-            imageUrl,
-            kind: "file",
-            fileType: "img",
-        });
+    const sharePhoto = async () => {
+        if (!selectedPhoto) return;
+        const url = new URL(selectedPhoto.img, window.location.origin).href;
 
-        requestAnimationFrame(() => focusWindow("imgfile"));
+        try {
+            if (navigator.share) {
+                await navigator.share({ title: "Gallery photo", url });
+            } else {
+                await navigator.clipboard.writeText(url);
+            }
+        } catch {
+            // Closing the native share sheet requires no follow-up.
+        }
     };
 
     return (
         <>
-            <div id="window-header">
+            <div id="window-header" className="photos-header">
                 <WindowControls target="photos" />
-                <h2 className="ml-4 font-semibold text-gray-700">Photos</h2>
-                <button
-                    type="button"
-                    className="icon ml-auto"
-                    aria-label="Open contact window"
-                    onClick={() => openWindow("contact")}
-                >
-                    <Mail className="size-4" />
-                </button>
+
+                {selectedPhoto ? (
+                    <>
+                        <button
+                            type="button"
+                            className="icon ml-4"
+                            aria-label="Back to gallery"
+                            onPointerDown={(event) => event.stopPropagation()}
+                            onClick={() => setSelectedPhotoId(null)}
+                        >
+                            <ArrowLeft className="size-5" />
+                        </button>
+                        <div className="photo-title">
+                            <h2>Gallery</h2>
+                            <p>{selectedIndex + 1} of {visiblePhotos.length}</p>
+                        </div>
+                        <div
+                            className="photo-toolbar-actions"
+                            onPointerDown={(event) => event.stopPropagation()}
+                        >
+                            <button
+                                type="button"
+                                className="icon"
+                                aria-label="Share photo"
+                                onClick={sharePhoto}
+                            >
+                                <Share2 className="size-5" />
+                            </button>
+                            <button
+                                type="button"
+                                className="icon"
+                                aria-label={
+                                    favorites.includes(selectedPhoto.id)
+                                        ? "Remove from favorites"
+                                        : "Add to favorites"
+                                }
+                                onClick={(event) => toggleFavorite(event, selectedPhoto.id)}
+                            >
+                                <Heart
+                                    className={`size-5 ${
+                                        favorites.includes(selectedPhoto.id)
+                                            ? "fill-red-500 text-red-500"
+                                            : ""
+                                    }`}
+                                />
+                            </button>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <h2 className="ml-4 font-semibold text-gray-700">Photos</h2>
+                        <button
+                            type="button"
+                            className="icon ml-auto"
+                            aria-label="Open contact window"
+                            onPointerDown={(event) => event.stopPropagation()}
+                            onClick={() => openWindow("contact")}
+                        >
+                            <Mail className="size-4" />
+                        </button>
+                    </>
+                )}
             </div>
 
-            <div className="flex h-[480px] w-full overflow-hidden">
+            <div className="photos-body">
                 <aside className="sidebar">
                     <h2>Albums</h2>
                     <ul>
@@ -82,7 +166,10 @@ const Photos = () => {
                                 <button
                                     type="button"
                                     className="flex w-full items-center gap-2"
-                                    onClick={() => setSelectedGallery(title)}
+                                    onClick={() => {
+                                        setSelectedGallery(title);
+                                        setSelectedPhotoId(null);
+                                    }}
                                 >
                                     <img src={icon} alt="" />
                                     <p>{title}</p>
@@ -92,45 +179,75 @@ const Photos = () => {
                     </ul>
                 </aside>
 
-                <div className="gallery flex-1 overflow-y-auto">
-                    {visiblePhotos.length > 0 ? (
-                        <ul>
-                            {visiblePhotos.map(({ id, img }) => (
-                                <li key={id} className="group relative cursor-pointer">
-                                    <button
-                                        type="button"
-                                        className="block size-full cursor-pointer"
-                                        onClick={() => openPhoto(id, img)}
-                                    >
-                                        <img src={img} alt={`Gallery ${id}`} />
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="absolute right-2 top-2 rounded-full bg-black/40 p-1.5 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100"
-                                        aria-label={
-                                            favorites.includes(id)
-                                                ? "Remove from favorites"
-                                                : "Add to favorites"
-                                        }
-                                        onClick={(event) => toggleFavorite(event, id)}
-                                    >
-                                        <Heart
-                                            className={`size-4 ${
+                {selectedPhoto ? (
+                    <div className="photo-viewer">
+                        {visiblePhotos.length > 1 && (
+                            <button
+                                type="button"
+                                className="slider-control previous"
+                                aria-label="Previous photo"
+                                onClick={() => showPhotoAt(selectedIndex - 1)}
+                            >
+                                <ChevronLeft />
+                            </button>
+                        )}
+                        <img src={selectedPhoto.img} alt={`Gallery ${selectedPhoto.id}`} />
+                        {visiblePhotos.length > 1 && (
+                            <button
+                                type="button"
+                                className="slider-control next"
+                                aria-label="Next photo"
+                                onClick={() => showPhotoAt(selectedIndex + 1)}
+                            >
+                                <ChevronRight />
+                            </button>
+                        )}
+                    </div>
+                ) : (
+                    <div className="gallery">
+                        {visiblePhotos.length > 0 ? (
+                            <ul
+                                className={
+                                    selectedGallery === "Library"
+                                        ? "mosaic-grid"
+                                        : "album-grid"
+                                }
+                            >
+                                {visiblePhotos.map(({ id, img }) => (
+                                    <li key={id} className="group relative cursor-pointer">
+                                        <button
+                                            type="button"
+                                            className="block size-full cursor-pointer"
+                                            onClick={() => setSelectedPhotoId(id)}
+                                        >
+                                            <img src={img} alt={`Gallery ${id}`} />
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="photo-favorite"
+                                            aria-label={
                                                 favorites.includes(id)
-                                                    ? "fill-red-500 text-red-500"
-                                                    : ""
-                                            }`}
-                                        />
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p className="flex h-full items-center justify-center text-sm text-gray-400">
-                            No favorite photos yet.
-                        </p>
-                    )}
-                </div>
+                                                    ? "Remove from favorites"
+                                                    : "Add to favorites"
+                                            }
+                                            onClick={(event) => toggleFavorite(event, id)}
+                                        >
+                                            <Heart
+                                                className={`size-4 ${
+                                                    favorites.includes(id)
+                                                        ? "fill-red-500 text-red-500"
+                                                        : ""
+                                                }`}
+                                            />
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="gallery-empty">No photos in this album.</p>
+                        )}
+                    </div>
+                )}
             </div>
         </>
     );
